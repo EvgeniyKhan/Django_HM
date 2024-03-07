@@ -4,6 +4,8 @@ from datetime import datetime
 
 from django.shortcuts import render
 
+from catalog.models import Product
+
 
 def index(request):
     return render(request, 'catalog/index.html')
@@ -24,3 +26,9 @@ def contacts(request):
                 {'Date': datetime.now().strftime('%Y-%m-%d %H:%M:%S'), 'Name': name, 'Phone': phone,'Message': message}
             )
     return render(request, 'catalog/contacts.html')
+
+
+def products_detail(request, pk):
+    context = {'objects': Product.objects.get(pk=pk)}
+    return render(request, 'catalog/products_detail.html', context)
+
